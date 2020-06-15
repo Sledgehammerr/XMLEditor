@@ -1,0 +1,36 @@
+<?xml version="1.0" standalone="yes"?>
+<xs:schema id="ArrayOfStudent" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xs:element name="ArrayOfStudent" msdata:IsDataSet="true" msdata:Locale="en-US">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Student">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Name" type="xs:string" minOccurs="0" msdata:Ordinal="0" />
+              <xs:element name="Group" nillable="true" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:simpleContent msdata:ColumnName="Group_Text" msdata:Ordinal="2">
+                    <xs:extension base="xs:string">
+                      <xs:attribute name="Course" type="xs:string" />
+                      <xs:attribute name="Track" type="xs:string" />
+                      <xs:attribute name="Student_Id" type="xs:int" />
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="Student_Id" msdata:AutoIncrement="true" type="xs:int" use="required" />
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//Student" />
+      <xs:field xpath="@Student_Id" />
+    </xs:unique>
+    <xs:keyref name="Student_Group" refer="Constraint1" msdata:IsNested="true">
+      <xs:selector xpath=".//Group" />
+      <xs:field xpath="@Student_Id" />
+    </xs:keyref>
+  </xs:element>
+</xs:schema>
